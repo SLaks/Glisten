@@ -40,7 +40,7 @@ html, body {
 
 .MessageList {
 	list-style: none;
-	background-color: #ccc;
+	background-color: #ddd;
 
 	li {
 		padding: 2em 1em;
@@ -55,6 +55,35 @@ html, body {
 		h4 {
 			text-align: right;
 			font-size: 2em;
+		}
+	}
+}
+
+.MessageDetail {
+	overflow: hidden;
+
+	article {
+		padding-top: .1px; //Prevent the H! margin from collapsing
+		width: 100%;
+		height: 100%;
+
+		h1 {
+			text-align: center;
+			font-size: 10em;
+			margin: 30% 2em 0;
+			text-transform: uppercase;
+			letter-spacing: 6px;
+		}
+
+		h3 {
+			text-align: right;
+			margin: 3em 3em 0 0;
+			font-style: italic;
+			font-size: 3em;
+
+			&::before {
+				content: '—';
+			}
 		}
 	}
 }

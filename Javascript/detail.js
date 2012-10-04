@@ -18,10 +18,5 @@ $.each(data, function () {
 	this.cssClass = "Color" + (1 + (hash % colorCount));
 });
 
-var mainPane = {
-	top: ko.observable(data[0]),
-	bottom: ko.observable({})
-};
-
-ko.applyBindings({ messages: data, current: mainPane });
+ko.applyBindings({ messages: data });
 
