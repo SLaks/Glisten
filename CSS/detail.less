@@ -13,16 +13,17 @@ html, body {
 	font-family: 'Droid Sans';
 }
 
-.LeftPane{
+.LeftPane {
 	width: 30%;
-	position: relative;
+}
+.RightPane {
+	width: 70%;
 }
 
 .MessageList {
 	list-style: none;
 
 	li {
-		width: 100%;
 		padding: 2em 1em;
 		border-bottom: 2px solid white;
 
@@ -39,4 +40,22 @@ html, body {
 	}
 }
 
+@media only screen and (max-width: 600px) {
+	.LeftPane {
+		width: 50%;
+	}
 
+	.RightPane {
+		width: 50%;
+	}
+}
+
+@media only screen and (max-width: 400px) {
+	.LeftPane {
+		width: 100%;
+	}
+
+	.RightPane {
+		display: none;
+	}
+}
