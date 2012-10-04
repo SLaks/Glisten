@@ -20,3 +20,26 @@ $.each(data, function () {
 
 ko.applyBindings({ messages: data });
 
+
+var activeIndex = 0;
+function selectMessage(index) {
+	activeIndex = index;
+	$('.MessageDetail:visible > :first-child').css('margin-top',
+		function (i, old) {
+			console.log(old);
+			console.log($(this).parent().children().eq(index).offset());
+			return parseInt(old, 10) - $(this).parent().children().eq(index).offset().top;
+		}
+	);
+}
+
+$(window).resize(function () {
+	selectMessage(activeIndex);
+});
+
+setInterval(function () {
+	if (activeIndex === data.length - 1)
+		selectMessage(0);
+	else
+		selectMessage(activeIndex + 1);
+}, 15000);
