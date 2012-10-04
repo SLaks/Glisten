@@ -3,8 +3,8 @@
 		background-color: @endColor;
 		background-repeat: no-repeat;
 		background-image: -webkit-gradient(linear, left top, right top, from(@startColor), to(@endColor));
-		background-image: -webkit-linear-gradient(right center, @startColor, @endColor);
-		background-image: -moz-linear-gradient(right center, @startColor, @endColor);
+		background-image: -webkit-linear-gradient(left center, @startColor, @endColor);
+		background-image: -moz-linear-gradient(left center, @startColor, @endColor);
 		background-image: -o-linear-gradient(left, @startColor, @endColor);
 		background-image: -khtml-gradient(linear, left top, right top, from(@startColor), to(@endColor));
 		filter: e(%("progid:DXImageTransform.Microsoft.Gradient(StartColorStr='%d', EndColorStr='%d', GradientType=1)",@startColor,@endColor));
@@ -29,7 +29,7 @@
 	li {
 		.ColorScheme(@baseColor) {
 			& {
-				#gradient.horizontal(lighten(@baseColor, .5), darken(@baseColor, 1));
+				#gradient.horizontal(lighten(@baseColor, 1), darken(@baseColor, 2));
 			}
 		}
 
