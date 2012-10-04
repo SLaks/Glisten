@@ -7,7 +7,7 @@ var colorCount = 5;
 var data = [
 	{ author: 'Schabse Laks', text: 'Welcome to the CalendarBoard system!' },
 	{ author: 'Chana Laks', text: 'We aren\'t having anyone for שבת' },
-	{ author: 'David Laks', text: 'There are two Kiddushim to go to.' },
+	{ author: 'David Laks', text: 'There are two Kiddushim to go to.' }
 ];
 
 $.each(data, function () {
@@ -18,4 +18,10 @@ $.each(data, function () {
 	this.cssClass = "Color" + (1 + (hash % colorCount));
 });
 
-ko.applyBindings({ messages: data });
+var mainPane = {
+	top: ko.observable(data[0]),
+	bottom: ko.observable({})
+};
+
+ko.applyBindings({ messages: data, current: mainPane });
+
