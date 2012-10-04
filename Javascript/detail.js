@@ -20,17 +20,19 @@ $.each(data, function () {
 
 ko.applyBindings({ messages: data });
 
+var activeIndex = 0;
+
 function updateLayout() {
 	$('.MessageDetail article').css('padding', function () {
 		var me = $(this);
 		console.log(me.parent().height());
 		return (me.parent().height() - me.height()) / 2 + 'px ' + me.css('padding-left');
 	});
+	$('.ListBorder .Content').height($('.MessageList > *').eq(activeIndex).innerHeight());
 }
 
 updateLayout();
 
-var activeIndex = 0;
 function selectMessage(index) {
 	activeIndex = index;
 	$('.MessageDetail:visible > :first-child').css('margin-top',
@@ -38,6 +40,7 @@ function selectMessage(index) {
 			return parseInt(old, 10) - $(this).parent().children().eq(index).offset().top;
 		}
 	);
+	$('.ListBorder').css('margin-top', $('.MessageList > *').eq(activeIndex).offset().top);
 }
 
 $(window).resize(function () {

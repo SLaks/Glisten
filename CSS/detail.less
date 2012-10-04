@@ -1,4 +1,5 @@
 ﻿@import url(detail-colors.less);
+@borderWidth: 2px;
 
 * {
 	margin: 0;
@@ -16,6 +17,15 @@ html, body {
 .Panes(@leftWidth) {
 	.LeftPane {
 		width: @leftWidth;
+		height: 100%;
+	}
+
+	.ListBorder {
+		position: absolute;
+		left: @leftWidth;
+		top: 0;
+		margin-left: - @borderWidth;
+		width: @borderWidth;
 		height: 100%;
 	}
 
@@ -44,7 +54,7 @@ html, body {
 
 	li {
 		padding: 2em 1em;
-		border-bottom: 2px solid white;
+		border-bottom: @borderWidth solid white;
 
 		h2 {
 			font-weight: normal;
@@ -56,6 +66,29 @@ html, body {
 			text-align: right;
 			font-size: 2em;
 		}
+	}
+}
+
+.ListBorder {
+	-moz-transition: margin-top ease-out .8s;
+	-o-transition: margin-top ease-out .8s;
+	-webkit-transition: margin-top ease-out .8s;
+	transition: margin-top ease-out .8s;
+	z-index: 2;
+
+	.Border {
+		height: 100%;
+		width: 100%;
+		background-color: white;
+
+		&:first-child {
+			top: -100%;
+			position: absolute;
+		}
+	}
+
+	.Content {
+		background-color: transparent;
 	}
 }
 
