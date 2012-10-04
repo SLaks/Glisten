@@ -32,6 +32,7 @@ function updateLayout() {
 }
 
 updateLayout();
+setTimeout(updateLayout, 10);	//Fix Chrome word wrapping issue
 
 function selectMessage(index) {
 	activeIndex = index;
@@ -53,4 +54,4 @@ setInterval(function () {
 		selectMessage(0);
 	else
 		selectMessage(activeIndex + 1);
-}, 15000);
+}, 3000);
