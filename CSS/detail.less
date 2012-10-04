@@ -69,11 +69,13 @@ html, body {
 	}
 }
 
+@easing: cubic-bezier(.69,.9,.9,1);
+
 .ListBorder {
-	-moz-transition: margin-top ease-out .8s;
-	-o-transition: margin-top ease-out .8s;
-	-webkit-transition: margin-top ease-out .8s;
-	transition: margin-top ease-out .8s;
+	-moz-transition: margin-top @easing .8s;
+	-o-transition: margin-top @easing .8s;
+	-webkit-transition: margin-top @easing .8s;
+	transition: margin-top @easing .8s;
 	z-index: 2;
 
 	.Border {
@@ -96,10 +98,10 @@ html, body {
 	overflow: hidden;
 
 	article {
-		-moz-transition: margin-top ease-out .8s;
-		-o-transition: margin-top ease-out .8s;
-		-webkit-transition: margin-top ease-out .8s;
-		transition: margin-top ease-out .8s;
+		-moz-transition: margin-top @easing .8s;
+		-o-transition: margin-top @easing .8s;
+		-webkit-transition: margin-top @easing .8s;
+		transition: margin-top @easing .8s;
 		padding: 0 2em;
 
 		h1 {
