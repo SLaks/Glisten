@@ -1,4 +1,4 @@
-﻿@import url(detail-colors.less?2);
+﻿@import url(detail-colors.less);
 
 * {
 	margin: 0;
@@ -7,21 +7,40 @@
 }
 
 html, body {
-	min-height: 100%;
+	height: 100%;
 	width: 100%;
 	font-size: 8px;
 	font-family: 'Droid Sans';
 }
 
-.LeftPane {
-	width: 30%;
+.Panes(@leftWidth) {
+	.LeftPane {
+		float: left;
+		width: @leftWidth;
+		height: 100%;
+	}
+
+	.RightPane {
+		float: left;
+		height: 100%;
+		left: @leftWidth;
+		width: 100% - @leftWidth;
+	}
 }
-.RightPane {
-	width: 70%;
+
+.Panes(35%);
+
+@media only screen and (max-width: 600px) {
+	.Panes(50%);
+}
+
+@media only screen and (max-width: 400px) {
+	.Panes(50%);
 }
 
 .MessageList {
 	list-style: none;
+	background-color: #ccc;
 
 	li {
 		padding: 2em 1em;
@@ -37,25 +56,5 @@ html, body {
 			text-align: right;
 			font-size: 2em;
 		}
-	}
-}
-
-@media only screen and (max-width: 600px) {
-	.LeftPane {
-		width: 50%;
-	}
-
-	.RightPane {
-		width: 50%;
-	}
-}
-
-@media only screen and (max-width: 400px) {
-	.LeftPane {
-		width: 100%;
-	}
-
-	.RightPane {
-		display: none;
 	}
 }
