@@ -1,0 +1,67 @@
+﻿#gradient { /*-- GRADIENT MIXIN BUNDLE --*/ /* borrowed from bootstrap.less */
+	.horizontal(@startColor: #555, @endColor: #333) {
+		background-color: @endColor;
+		background-repeat: no-repeat;
+		background-image: -webkit-gradient(linear, left top, right top, from(@startColor), to(@endColor));
+		background-image: -webkit-linear-gradient(right center, @startColor, @endColor);
+		background-image: -moz-linear-gradient(right center, @startColor, @endColor);
+		background-image: -o-linear-gradient(left, @startColor, @endColor);
+		background-image: -khtml-gradient(linear, left top, right top, from(@startColor), to(@endColor));
+		filter: e(%("progid:DXImageTransform.Microsoft.Gradient(StartColorStr='%d', EndColorStr='%d', GradientType=1)",@startColor,@endColor));
+		-ms-filter: %("progid:DXImageTransform.Microsoft.gradient(startColorStr='%d', EndColorStr='%d', GradientType=1))",@startColor,@endColor);
+	}
+
+	.vertical(@startColor: #555, @endColor: #333) {
+		background-color: @endColor;
+		background-repeat: no-repeat;
+		background-image: -webkit-gradient(linear, left top, left bottom, from(@startColor), to(@endColor));
+		background-image: -webkit-linear-gradient(@startColor, @endColor);
+		background-image: -moz-linear-gradient(@startColor, @endColor);
+		background-image: -o-linear-gradient(top, @startColor, @endColor);
+		background-image: -khtml-gradient(linear, left top, left bottom, from(@startColor), to(@endColor));
+		filter: e(%("progid:DXImageTransform.Microsoft.Gradient(StartColorStr='%d', EndColorStr='%d', GradientType=0)",@startColor,@endColor));
+		-ms-filter: %("progid:DXImageTransform.Microsoft.gradient(startColorStr='%d', EndColorStr='%d', GradientType=0))",@startColor,@endColor);
+	}
+}
+
+
+.MessageList {
+	li {
+		.ColorScheme(@baseColor) {
+			& {
+				#gradient.horizontal(lighten(@baseColor, .5), darken(@baseColor, 1));
+			}
+		}
+
+		#defineColors
+		();
+	}
+}
+
+
+#defineColors() {
+
+	& {
+		.ColorScheme(#ffa5a5);
+	}
+
+	&.Color1 {
+		.ColorScheme(#FFE5C7);
+	}
+
+	&.Color2 {
+		.ColorScheme(#EEC7FF);
+	}
+
+	&.Color3 {
+		.ColorScheme(#D2FFBD);
+	}
+
+	&.Color4 {
+		.ColorScheme(#BDCAFF);
+	}
+
+	&.Color5 {
+		.ColorScheme(#FFBDCC);
+	}
+}
