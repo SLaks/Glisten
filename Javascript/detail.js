@@ -20,20 +20,28 @@ $.each(data, function () {
 
 ko.applyBindings({ messages: data });
 
+function updateLayout() {
+	$('.MessageDetail article').css('padding', function () {
+		var me = $(this);
+		console.log(me.parent().height());
+		return (me.parent().height() - me.height()) / 2 + 'px ' + me.css('padding-left');
+	});
+}
+
+updateLayout();
 
 var activeIndex = 0;
 function selectMessage(index) {
 	activeIndex = index;
 	$('.MessageDetail:visible > :first-child').css('margin-top',
 		function (i, old) {
-			console.log(old);
-			console.log($(this).parent().children().eq(index).offset());
 			return parseInt(old, 10) - $(this).parent().children().eq(index).offset().top;
 		}
 	);
 }
 
 $(window).resize(function () {
+	updateLayout();
 	selectMessage(activeIndex);
 });
 
