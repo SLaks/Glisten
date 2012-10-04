@@ -91,6 +91,14 @@ html, body {
 
 	.Content {
 		background-color: transparent;
+		// After we set the height for the initial list item,
+		// resizes (for taller items ) should have animation.
+		.Ready {
+			-moz-transition: height @easing .8s;
+			-o-transition: height @easing .8s;
+			-webkit-transition: height @easing .8s;
+			transition: height @easing .8s;
+		}
 	}
 }
 

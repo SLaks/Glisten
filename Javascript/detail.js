@@ -32,10 +32,16 @@ function updateLayout() {
 }
 
 updateLayout();
-setTimeout(updateLayout, 10);	//Fix Chrome word wrapping issue
+setTimeout(function () {
+	updateLayout();
+	$('.ListBorder .Content').addClass('Ready');
+}, 10);	//Fix Chrome word wrapping issue
 
 function selectMessage(index) {
 	activeIndex = index;
+
+	//In case the new list item has a different height.
+	updateLayout();
 	$('.MessageDetail:visible > :first-child').css('margin-top',
 		function (i, old) {
 			return parseInt(old, 10) - $(this).parent().children().eq(index).offset().top;
