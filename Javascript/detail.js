@@ -25,7 +25,6 @@ var activeIndex = 0;
 function updateLayout() {
 	$('.MessageDetail article').css('padding', function () {
 		var me = $(this);
-		console.log(me.parent().height());
 		return (me.parent().height() - me.height()) / 2 + 'px ' + me.css('padding-left');
 	});
 	$('.ListBorder .Content').height($('.MessageList > *').eq(activeIndex).innerHeight());

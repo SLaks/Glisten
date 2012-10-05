@@ -51,6 +51,9 @@ hr {
 img {
     vertical-align: middle;
 }
+a img {
+	border: none;
+}
 
 fieldset {
     border: 0;
