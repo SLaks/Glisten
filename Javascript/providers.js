@@ -9,7 +9,7 @@
 //each button will have the property name added as a class.
 
 (function (global, undefined) {
-	var CalenderBoard = global.CalenderBoard = global.CalenderBoard || {};
+	var CalenderBoard = global.Glisten = global.Glisten || {};
 
 	CalenderBoard.providers = {
 		trello: {

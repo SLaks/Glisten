@@ -4,9 +4,9 @@
 
 var loginOptions = [];
 
-for (var id in CalenderBoard.providers) {
-	if (!CalenderBoard.providers.hasOwnProperty(id)) continue;
-	var p = CalenderBoard.providers[id];
+for (var id in Glisten.providers) {
+	if (!Glisten.providers.hasOwnProperty(id)) continue;
+	var p = Glisten.providers[id];
 	if (typeof p.login !== 'function') continue;
 
 	loginOptions.push({

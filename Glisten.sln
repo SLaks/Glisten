@@ -1,19 +1,19 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 2012
-Project("{E24C65DC-7377-472B-9ABA-BC803B73C61A}") = "CalendarBoard", ".", "{67A91F09-AFE5-427E-8BD1-722EA3802CDD}"
+Project("{E24C65DC-7377-472B-9ABA-BC803B73C61A}") = "Glisten", ".", "{67A91F09-AFE5-427E-8BD1-722EA3802CDD}"
 	ProjectSection(WebsiteProperties) = preProject
 		TargetFrameworkMoniker = ".NETFramework,Version%3Dv4.0"
-		Debug.AspNetCompiler.VirtualPath = "/CalendarBoard"
-		Debug.AspNetCompiler.PhysicalPath = "..\CalendarBoard\"
-		Debug.AspNetCompiler.TargetPath = "PrecompiledWeb\CalendarBoard\"
+		Debug.AspNetCompiler.VirtualPath = "/Glisten"
+		Debug.AspNetCompiler.PhysicalPath = "..\Glisten\"
+		Debug.AspNetCompiler.TargetPath = "PrecompiledWeb\Glisten\"
 		Debug.AspNetCompiler.Updateable = "true"
 		Debug.AspNetCompiler.ForceOverwrite = "true"
 		Debug.AspNetCompiler.FixedNames = "false"
 		Debug.AspNetCompiler.Debug = "True"
-		Release.AspNetCompiler.VirtualPath = "/CalendarBoard"
-		Release.AspNetCompiler.PhysicalPath = "..\CalendarBoard\"
-		Release.AspNetCompiler.TargetPath = "PrecompiledWeb\CalendarBoard\"
+		Release.AspNetCompiler.VirtualPath = "/Glisten"
+		Release.AspNetCompiler.PhysicalPath = "..\Glisten\"
+		Release.AspNetCompiler.TargetPath = "PrecompiledWeb\Glisten\"
 		Release.AspNetCompiler.Updateable = "true"
 		Release.AspNetCompiler.ForceOverwrite = "true"
 		Release.AspNetCompiler.FixedNames = "false"
