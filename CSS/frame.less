@@ -1,8 +1,38 @@
 ﻿@import url('mixins.less');
+@import url("http://fonts.googleapis.com/css?family=Open+Sans:300,600");
 
 body {
-	padding-top: 80px;
 	height: auto;
-
 	.gradient.vertical(#A9C9FF, #81B0FF);
+}
+
+header {
+	background-color: rgba(255, 255, 255, .2);
+	font-family: 'Open Sans';
+	margin-bottom: 50px;
+	padding: 20px;
+
+	h1, h2 {
+		text-align: right;
+		width: 150px;
+	}
+
+	h1 {
+		font-size: 40px;
+		font-weight: 300;
+	}
+
+	h2 {
+		color: #333;
+		font-size: 15px;
+		font-style: italic;
+
+		a {
+			color: navy;
+
+			&:hover {
+				color: #00a;
+			}
+		}
+	}
 }
