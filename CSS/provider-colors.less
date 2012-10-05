@@ -1,0 +1,29 @@
+﻿@import url('mixins.less');
+
+.LoginButtons {
+	a {
+		.ColorScheme(@baseColor, @textColor: #fff) {
+			& {
+				background-color: @baseColor;
+				color: @textColor;
+			}
+
+			&:hover {
+				background-color: lighten(@baseColor, 5);
+			}
+		}
+
+		.defineProviderColors();
+	}
+}
+
+
+.defineProviderColors() {
+	&.trello {
+		.ColorScheme(lighten(#164B69, 6));
+	}
+
+	&.gCalendar {
+		.ColorScheme(lighten(#317af1, 6));
+	}
+}

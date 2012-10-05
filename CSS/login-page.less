@@ -1,0 +1,59 @@
+﻿@import url('provider-colors.less');
+
+body {
+	padding-top: 80px;
+}
+
+.Container {
+	width: 240px;
+	margin: 0 auto;
+}
+
+@media only screen and (max-width: 320px) {
+	.Container {
+		width: 100%;
+	}
+}
+
+h1 {
+	font-size: 24px;
+}
+
+.LoginButtons {
+	a {
+		background: red;
+		display: block;
+		text-decoration: none;
+		margin: 12px 0;
+		font-size: 16px;
+		padding: 12px 24px;
+		-moz-transition: all ease-in-out .1s;
+		-o-transition: all ease-in-out .1s;
+		-webkit-transition: all ease-in-out .1s;
+		transition: all ease-in-out .1s;
+
+		img {
+			padding-right: 6px;
+		}
+
+		&:hover span {
+			text-decoration: underline;
+		}
+
+		&:active:hover {
+			-moz-transform-origin: center center;
+			-ms-transform-origin: center center;
+			-o-transform-origin: center center;
+			-webkit-transform-origin: center center;
+			transform-origin: center center;
+			-moz-transform: scale(.95);
+			-ms-transform: scale(.95);
+			-o-transform: scale(.95);
+			-webkit-transform: scale(.95);
+			transform: scale(.95);
+			-moz-box-shadow: 0 0 12px 4px rgba(0, 0, 128, 0.3);
+			-webkit-box-shadow: 0 0 12px 4px rgba(0, 0, 128, 0.3);
+			box-shadow: 0 0 12px 4px rgba(0, 0, 128, 0.3);
+		}
+	}
+}
