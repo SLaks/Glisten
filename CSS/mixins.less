@@ -38,3 +38,64 @@
 		-ms-filter: %("progid:DXImageTransform.Microsoft.gradient(startColorStr='%d', EndColorStr='%d', GradientType=1))",@startColor,@endColor);
 	}
 }
+
+@-webkit-keyframes LoaderZoom {
+	from {
+		-moz-transform: scale(1);
+		-ms-transform: scale(1);
+		-o-transform: scale(1);
+		-webkit-transform: scale(1);
+		transform: scale(1);
+	}
+
+	to {
+		-moz-transform: scale(2);
+		-ms-transform: scale(2);
+		-o-transform: scale(2);
+		-webkit-transform: scale(2);
+		transform: scale(2);
+	}
+}
+
+@keyframes LoaderZoom {
+	from {
+		-moz-transform: scale(1);
+		-ms-transform: scale(1);
+		-o-transform: scale(1);
+		-webkit-transform: scale(1);
+		transform: scale(1);
+	}
+
+	to {
+		-moz-transform: scale(2);
+		-ms-transform: scale(2);
+		-o-transform: scale(2);
+		-webkit-transform: scale(2);
+		transform: scale(2);
+	}
+}
+
+.Loader(@size) {
+	&{
+		width: @size;
+		height: @size;
+		display: block;
+		content: ' ';
+		-moz-transform-origin: center center;
+		-ms-transform-origin: center center;
+		-o-transform-origin: center center;
+		-webkit-transform-origin: center center;
+		transform-origin: center center;
+		background: #f2f6f8;
+		background: -moz-radial-gradient(center, ellipse cover, #f2f6f8 0%, #d8e1e7 50%, #b5c6d0 51%, transparent 100%);
+		background: -webkit-gradient(radial, center center, 0px, center center, 100%, color-stop(0%,transparent), color-stop(50%,#d8e1e7), color-stop(51%,#b5c6d0), color-stop(100%,transparent));
+		background: -webkit-radial-gradient(center, ellipse cover, #e0eff9 0%,#d8e1e7 25%,#b5c6d0 26%,#e0eff9 50%, #d8e1e7 75%,#b5c6d0 76%, transparent 100%);
+		background: -o-radial-gradient(center, ellipse cover, #f2f6f8 0%,#d8e1e7 50%,#b5c6d0 51%,transparent 100%);
+		background: -ms-radial-gradient(center, ellipse cover, #f2f6f8 0%,#d8e1e7 50%,#b5c6d0 51%,transparent 100%);
+		background: radial-gradient(ellipse at center, #e0eff9 0%,#d8e1e7 .50%,#b5c6d0 .51%,#e0eff9 1.00%, #d8e1e7 50%,#b5c6d0 51%, transparent 100%);
+		-moz-animation: LoaderZoom 2s infinite normal;
+		-o-animation: LoaderZoom 2s infinite normal;
+		-webkit-animation: LoaderZoom 2s infinite normal;
+		animation: LoaderZoom 2s infinite normal;
+	}
+}
