@@ -75,27 +75,40 @@
 	}
 }
 
-.Loader(@size) {
-	&{
-		width: @size;
+.Loader(@color: blue) {
+	@size: 4px;
+	@spacing: 40px;
+	margin-top: 12px;
+	margin-left: @size / -2;
+	left: 50%;
+	position: absolute;
+	-moz-box-shadow: 0 0 @size @size inset;
+	-webkit-box-shadow: 0 0 @size @size inset;
+	box-shadow: 0 0 @size @size inset;
+
+
+	&, &::after, &::before {
+		-moz-border-radius: @size / 2;
+		-webkit-border-radius: @size / 2;
+		border-radius: @size / 2;
 		height: @size;
-		display: block;
+		width: @size;
 		content: ' ';
-		-moz-transform-origin: center center;
-		-ms-transform-origin: center center;
-		-o-transform-origin: center center;
-		-webkit-transform-origin: center center;
-		transform-origin: center center;
-		background: #f2f6f8;
-		background: -moz-radial-gradient(center, ellipse cover, #f2f6f8 0%, #d8e1e7 50%, #b5c6d0 51%, transparent 100%);
-		background: -webkit-gradient(radial, center center, 0px, center center, 100%, color-stop(0%,transparent), color-stop(50%,#d8e1e7), color-stop(51%,#b5c6d0), color-stop(100%,transparent));
-		background: -webkit-radial-gradient(center, ellipse cover, #e0eff9 0%,#d8e1e7 25%,#b5c6d0 26%,#e0eff9 50%, #d8e1e7 75%,#b5c6d0 76%, transparent 100%);
-		background: -o-radial-gradient(center, ellipse cover, #f2f6f8 0%,#d8e1e7 50%,#b5c6d0 51%,transparent 100%);
-		background: -ms-radial-gradient(center, ellipse cover, #f2f6f8 0%,#d8e1e7 50%,#b5c6d0 51%,transparent 100%);
-		background: radial-gradient(ellipse at center, #e0eff9 0%,#d8e1e7 .50%,#b5c6d0 .51%,#e0eff9 1.00%, #d8e1e7 50%,#b5c6d0 51%, transparent 100%);
-		-moz-animation: LoaderZoom 2s infinite normal;
-		-o-animation: LoaderZoom 2s infinite normal;
-		-webkit-animation: LoaderZoom 2s infinite normal;
-		animation: LoaderZoom 2s infinite normal;
+		display: block;
+	}
+
+	&::after, &::before {
+		box-shadow: 0 0 @size @size inset, @spacing 0;
+		margin: 0 @spacing;
+	}
+
+	&::after {
+		float: left;
+		margin-top: -1 * @size;
+	}
+
+	&::before {
+		float: right;
+		margin-right: 2 * @spacing;
 	}
 }
