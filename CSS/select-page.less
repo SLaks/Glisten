@@ -1,0 +1,21 @@
+﻿@import url('provider-colors.less');
+@import url('mixins.less');
+
+.Container {
+	width: 240px;
+	margin: 0 auto;
+}
+
+@media only screen and (max-width: 320px) {
+	.Container {
+		width: 100%;
+	}
+}
+
+h1 {
+	font-size: 24px;
+}
+
+.Loading {
+	.Loader(100px);
+}
