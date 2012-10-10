@@ -39,45 +39,122 @@
 	}
 }
 
-@-webkit-keyframes LoaderZoom {
-	from {
-		-moz-transform: scale(1);
-		-ms-transform: scale(1);
-		-o-transform: scale(1);
-		-webkit-transform: scale(1);
-		transform: scale(1);
+@size: 4px;
+@spacing: 40px;
+
+.LoaderLeft(@gap1, @gap2) {
+	box-shadow: 0 0 @size @size inset, @gap2 * @spacing 0;
+	margin-right: @gap1 * @spacing + @gap2 * @spacing;
+}
+
+.LoaderRight(@gap3, @gap4) {
+	box-shadow: 0 0 @size @size inset, @gap4 * @spacing 0;
+	margin-left: @gap3 * @spacing;
+}
+
+@-moz-keyframes LeftDots {
+	0% {
+		.LoaderLeft(-7, -6);
 	}
 
-	to {
-		-moz-transform: scale(2);
-		-ms-transform: scale(2);
-		-o-transform: scale(2);
-		-webkit-transform: scale(2);
-		transform: scale(2);
+	35%,75% {
+		.LoaderLeft(-7, -6);
+		margin-right: 2 * @spacing;
+	}
+
+	100% {
+		.LoaderLeft(7, 6);
 	}
 }
 
-@keyframes LoaderZoom {
-	from {
-		-moz-transform: scale(1);
-		-ms-transform: scale(1);
-		-o-transform: scale(1);
-		-webkit-transform: scale(1);
-		transform: scale(1);
+@-webkit-keyframes LeftDots {
+	0% {
+		.LoaderLeft(-7, -6);
 	}
 
-	to {
-		-moz-transform: scale(2);
-		-ms-transform: scale(2);
-		-o-transform: scale(2);
-		-webkit-transform: scale(2);
-		transform: scale(2);
+	35%,75% {
+		.LoaderLeft(-7, -6);
+		margin-right: 2 * @spacing;
+	}
+
+	100% {
+		.LoaderLeft(7, 6);
 	}
 }
+
+@keyframes LeftDots {
+	0% {
+		.LoaderLeft(-7, -6);
+	}
+
+	35%,75% {
+		.LoaderLeft(-7, -6);
+		margin-right: 2 * @spacing;
+	}
+
+	100% {
+		.LoaderLeft(7, 6);
+	}
+}
+
+@keyframes run2 {
+	0% {
+		margin-left: -500%;
+	}
+
+	30%,70% {
+		margin-left: 0%;
+	}
+
+	100% {
+		margin-left: 500%;
+	}
+}
+
+@keyframes run3 {
+	0% {
+		margin-left: -500%;
+	}
+
+	25%,65% {
+		margin-left: 0%;
+	}
+
+	100% {
+		margin-left: 500%;
+	}
+}
+
+@keyframes run4 {
+	0% {
+		margin-left: -500%;
+	}
+
+	20%,60% {
+		margin-left: 0%;
+	}
+
+	100% {
+		margin-left: 500%;
+	}
+}
+
+@keyframes run5 {
+	0% {
+		margin-left: -500%;
+	}
+
+	15%,55% {
+		margin-left: 0%;
+	}
+
+	100% {
+		margin-left: 500%;
+	}
+}
+
 
 .Loader(@color: blue) {
-	@size: 4px;
-	@spacing: 40px;
 	margin-top: 12px;
 	margin-left: @size / -2;
 	left: 50%;
@@ -95,20 +172,17 @@
 		width: @size;
 		content: ' ';
 		display: block;
-	}
-
-	&::after, &::before {
-		box-shadow: 0 0 @size @size inset, @spacing 0;
-		margin: 0 @spacing;
+		animation: LeftDots 8s ease-in-out infinite;
 	}
 
 	&::after {
 		float: left;
 		margin-top: -1 * @size;
+		.LoaderRight(1, 1);
 	}
 
 	&::before {
 		float: right;
-		margin-right: 2 * @spacing;
+		.LoaderLeft(1, 1);
 	}
 }
