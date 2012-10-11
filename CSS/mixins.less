@@ -52,21 +52,6 @@
 	margin-left: @gap3 * @spacing;
 }
 
-@-moz-keyframes LeftDots {
-	0% {
-		.LoaderLeft(-7, -6);
-	}
-
-	35%,75% {
-		.LoaderLeft(-7, -6);
-		margin-right: 2 * @spacing;
-	}
-
-	100% {
-		.LoaderLeft(7, 6);
-	}
-}
-
 @-webkit-keyframes LeftDots {
 	0% {
 		.LoaderLeft(-7, -6);
@@ -75,25 +60,12 @@
 	35%,75% {
 		.LoaderLeft(-7, -6);
 		margin-right: 2 * @spacing;
+		width: 45px;
 	}
 
 	100% {
 		.LoaderLeft(7, 6);
-	}
-}
-
-@keyframes LeftDots {
-	0% {
-		.LoaderLeft(-7, -6);
-	}
-
-	35%,75% {
-		.LoaderLeft(-7, -6);
-		margin-right: 2 * @spacing;
-	}
-
-	100% {
-		.LoaderLeft(7, 6);
+		background: red;
 	}
 }
 
@@ -160,8 +132,11 @@
 	left: 50%;
 	position: absolute;
 	-moz-box-shadow: 0 0 @size @size inset;
-	-webkit-box-shadow: 0 0 @size @size inset;
 	box-shadow: 0 0 @size @size inset;
+	-moz-animation: LeftDots 8s ease-in-out infinite;
+	-o-animation: LeftDots 8s ease-in-out infinite;
+	-webkit-animation: LeftDots 8s ease-in-out infinite;
+	animation: LeftDots 8s ease-in-out infinite;
 
 
 	&, &::after, &::before {
@@ -172,7 +147,6 @@
 		width: @size;
 		content: ' ';
 		display: block;
-		animation: LeftDots 8s ease-in-out infinite;
 	}
 
 	&::after {
