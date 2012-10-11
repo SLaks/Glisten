@@ -39,124 +39,38 @@
 	}
 }
 
-@size: 4px;
-@spacing: 40px;
-
-.LoaderLeft(@gap1, @gap2) {
-	box-shadow: 0 0 @size @size inset, @gap2 * @spacing 0;
-	margin-right: @gap1 * @spacing + @gap2 * @spacing;
-}
-
-.LoaderRight(@gap3, @gap4) {
-	box-shadow: 0 0 @size @size inset, @gap4 * @spacing 0;
-	margin-left: @gap3 * @spacing;
-}
-
-@-webkit-keyframes LeftDots {
-	0% {
-		.LoaderLeft(-7, -6);
-	}
-
-	35%,75% {
-		.LoaderLeft(-7, -6);
-		margin-right: 2 * @spacing;
-		width: 45px;
-	}
-
-	100% {
-		.LoaderLeft(7, 6);
-		background: red;
-	}
-}
-
-@keyframes run2 {
-	0% {
-		margin-left: -500%;
-	}
-
-	30%,70% {
-		margin-left: 0%;
-	}
-
-	100% {
-		margin-left: 500%;
-	}
-}
-
-@keyframes run3 {
-	0% {
-		margin-left: -500%;
-	}
-
-	25%,65% {
-		margin-left: 0%;
-	}
-
-	100% {
-		margin-left: 500%;
-	}
-}
-
-@keyframes run4 {
-	0% {
-		margin-left: -500%;
-	}
-
-	20%,60% {
-		margin-left: 0%;
-	}
-
-	100% {
-		margin-left: 500%;
-	}
-}
-
-@keyframes run5 {
-	0% {
-		margin-left: -500%;
-	}
-
-	15%,55% {
-		margin-left: 0%;
-	}
-
-	100% {
-		margin-left: 500%;
-	}
-}
+@BouncerWidth: 3px;
+@BouncerHeight: 16px;
+@LoaderPadding: 2px;
+@LoaderWidth: 150px;
 
 
-.Loader(@color: blue) {
-	margin-top: 12px;
-	margin-left: @size / -2;
+.Loader() {
 	left: 50%;
 	position: absolute;
-	-moz-box-shadow: 0 0 @size @size inset;
-	box-shadow: 0 0 @size @size inset;
-	-moz-animation: LeftDots 8s ease-in-out infinite;
-	-o-animation: LeftDots 8s ease-in-out infinite;
-	-webkit-animation: LeftDots 8s ease-in-out infinite;
-	animation: LeftDots 8s ease-in-out infinite;
+	margin-left: -.5 * (@LoaderWidth - 1.5 * @BouncerWidth);
+	width: @LoaderWidth - 1.5 * @BouncerWidth;
+	height: @BouncerHeight;
+	background-color: rgb(64,64,255);
+	-moz-border-radius: @BouncerWidth / 2;
+	-webkit-border-radius: @BouncerWidth / 2;
+	padding: 3px;
+	padding-left: @LoaderPadding + 1.5 * @BouncerWidth;
+	border: @LoaderPadding solid white;
+	border-radius: @BouncerWidth / 2;
 
-
-	&, &::after, &::before {
-		-moz-border-radius: @size / 2;
-		-webkit-border-radius: @size / 2;
-		border-radius: @size / 2;
-		height: @size;
-		width: @size;
-		content: ' ';
-		display: block;
-	}
 
 	&::after {
-		float: left;
-		margin-top: -1 * @size;
-		.LoaderRight(1, 1);
-	}
-
-	&::before {
-		float: right;
-		.LoaderLeft(1, 1);
+		display: block;
+		content: ' ';
+		width: @BouncerWidth;
+		height: @BouncerHeight;
+		-moz-border-radius: @BouncerWidth / 2;
+		-webkit-border-radius: @BouncerWidth / 2;
+		border-radius: @BouncerWidth / 2;
+		-moz-box-shadow: -1.5 * @BouncerWidth 0 rgba(0, 0, 128, .4);
+		-webkit-box-shadow: -1.5 * @BouncerWidth 0 rgba(0, 0, 128, .4);
+		box-shadow: -1.5 * @BouncerWidth 0 rgba(0, 0, 128, .4);
+		background-color: navy;
 	}
 }
