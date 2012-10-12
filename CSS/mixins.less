@@ -43,6 +43,7 @@
 @BouncerHeight: 4 * @BouncerWidth;
 @LoaderPadding: 3px;
 @LoaderWidth: 175px;
+@AnimationDuration: 2s;
 
 .LoaderWidth(@shadowX, @bouncerX) {
 	padding-left: @LoaderPadding + @shadowX;
@@ -50,19 +51,42 @@
 	width: @bouncerX - @shadowX;
 }
 
-@-webkit-keyframes Loader {
+@-webkit-keyframes LoaderMotion {
 	0% {
 		.LoaderWidth(0, 1.5 * @BouncerWidth);
 	}
 
-	50% {
+	100% {
 		.LoaderWidth((@LoaderWidth - @BouncerWidth) / 2, (@LoaderWidth - @BouncerWidth) / 2);
+	}
+}
+
+@-webkit-keyframes LoaderTransform {
+	50% {
+		-moz-transform: scale(1, 1);
+		-ms-transform: scale(1, 1);
+		-o-transform: scale(1, 1);
+		-webkit-transform: scale(1, 1);
+		transform: scale(1, 1);
+	}
+
+	50.0001% {
+		-moz-transform: scale(-1, 1);
+		-ms-transform: scale(-1, 1);
+		-o-transform: scale(-1, 1);
+		-webkit-transform: scale(-1, 1);
+		transform: scale(-1, 1);
 	}
 
 	100% {
-		.LoaderWidth(0, 1.5 * @BouncerWidth);
+		-moz-transform: scale(-1, 1);
+		-ms-transform: scale(-1, 1);
+		-o-transform: scale(-1, 1);
+		-webkit-transform: scale(-1, 1);
+		transform: scale(-1, 1);
 	}
 }
+
 
 .Loader() {
 	left: 50%;
@@ -77,7 +101,7 @@
 	margin-left: -.5 * (@LoaderWidth + 4 * @LoaderPadding); // Width + padding + border
 	border: @LoaderPadding solid white;
 	.LoaderWidth(0, 1.5 * @BouncerWidth);
-	-webkit-animation: Loader 4s ease-in-out infinite;
+	-webkit-animation: LoaderMotion @AnimationDuration / 2 ease-in infinite alternate, LoaderTransform @AnimationDuration infinite alternate;
 
 	&::after {
 		display: block;
