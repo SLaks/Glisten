@@ -41,8 +41,9 @@
 
 @BouncerWidth: 6px;
 @BouncerHeight: 4 * @BouncerWidth;
-@LoaderPadding: 3px;
 @LoaderWidth: 175px;
+@LoaderPadding: 3px;
+@LoaderBorder: 2px;
 @AnimationDuration: 2s;
 
 .LoaderWidth(@shadowX, @bouncerX) {
@@ -53,7 +54,7 @@
 
 @-webkit-keyframes LoaderMotion {
 	0% {
-		.LoaderWidth(0, 1.5 * @BouncerWidth);
+		.LoaderWidth(0, 2 * @BouncerWidth);
 	}
 
 	100% {
@@ -98,8 +99,8 @@
 	-webkit-border-radius: @BouncerWidth / 2;
 	border-radius: @BouncerWidth / 2;
 	padding: @LoaderPadding;
-	margin-left: -.5 * (@LoaderWidth + 4 * @LoaderPadding); // Width + padding + border
-	border: @LoaderPadding solid white;
+	margin-left: -.5 * (@LoaderWidth + 2 * @LoaderPadding - 2 * @LoaderBorder);
+	border: @LoaderBorder solid white;
 	.LoaderWidth(0, 1.5 * @BouncerWidth);
 	-webkit-animation: LoaderMotion @AnimationDuration / 2 ease-in infinite alternate, LoaderTransform @AnimationDuration infinite alternate;
 
