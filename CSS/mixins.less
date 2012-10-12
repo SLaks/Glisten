@@ -39,26 +39,45 @@
 	}
 }
 
-@BouncerWidth: 3px;
-@BouncerHeight: 16px;
-@LoaderPadding: 2px;
-@LoaderWidth: 150px;
+@BouncerWidth: 6px;
+@BouncerHeight: 4 * @BouncerWidth;
+@LoaderPadding: 3px;
+@LoaderWidth: 175px;
 
+.LoaderWidth(@shadowX, @bouncerX) {
+	padding-left: @LoaderPadding + @shadowX;
+	padding-right: @LoaderPadding + @LoaderWidth - @bouncerX - @BouncerWidth;
+	width: @bouncerX - @shadowX;
+}
+
+@-webkit-keyframes Loader {
+	0% {
+		.LoaderWidth(0, 1.5 * @BouncerWidth);
+	}
+
+	50% {
+		.LoaderWidth((@LoaderWidth - @BouncerWidth) / 2, (@LoaderWidth - @BouncerWidth) / 2);
+	}
+
+	100% {
+		.LoaderWidth(0, 1.5 * @BouncerWidth);
+	}
+}
 
 .Loader() {
 	left: 50%;
 	position: absolute;
-	margin-left: -.5 * (@LoaderWidth - 1.5 * @BouncerWidth);
-	width: @LoaderWidth - 1.5 * @BouncerWidth;
+	margin-top: 10px;
 	height: @BouncerHeight;
 	background-color: rgb(64,64,255);
 	-moz-border-radius: @BouncerWidth / 2;
 	-webkit-border-radius: @BouncerWidth / 2;
-	padding: 3px;
-	padding-left: @LoaderPadding + 1.5 * @BouncerWidth;
-	border: @LoaderPadding solid white;
 	border-radius: @BouncerWidth / 2;
-
+	padding: @LoaderPadding;
+	margin-left: -.5 * (@LoaderWidth + 4 * @LoaderPadding); // Width + padding + border
+	border: @LoaderPadding solid white;
+	.LoaderWidth(0, 1.5 * @BouncerWidth);
+	-webkit-animation: Loader 4s ease-in-out infinite;
 
 	&::after {
 		display: block;
@@ -68,9 +87,21 @@
 		-moz-border-radius: @BouncerWidth / 2;
 		-webkit-border-radius: @BouncerWidth / 2;
 		border-radius: @BouncerWidth / 2;
-		-moz-box-shadow: -1.5 * @BouncerWidth 0 rgba(0, 0, 128, .4);
-		-webkit-box-shadow: -1.5 * @BouncerWidth 0 rgba(0, 0, 128, .4);
-		box-shadow: -1.5 * @BouncerWidth 0 rgba(0, 0, 128, .4);
+		-moz-box-shadow: 0 @BouncerHeight rgba(0, 0, 128, .4) inset;
+		-webkit-box-shadow: 0 @BouncerHeight rgba(0, 0, 128, .4) inset;
+		box-shadow: 0 @BouncerHeight rgba(0, 0, 128, .4) inset;
+	}
+
+	&::before {
+		display: block;
+		content: ' ';
+		width: @BouncerWidth;
+		height: @BouncerHeight;
+		-moz-border-radius: @BouncerWidth / 2;
+		-webkit-border-radius: @BouncerWidth / 2;
+		border-radius: @BouncerWidth / 2;
+		float: right;
+		margin-right: -1 * @BouncerWidth;
 		background-color: navy;
 	}
 }
