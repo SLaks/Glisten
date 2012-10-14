@@ -11,7 +11,9 @@ for (var id in Glisten.providers) {
 
 	loginOptions.push({
 		id: id,
-		name: p.displayName
+		name: p.displayName,
+		url: 'select.html?source=' + encodeURIComponent(id),
+		iconUrl: 'images/' + encodeURI(id) + '.png'
 	});
 }
 ko.applyBindings({ loginOptions: loginOptions });

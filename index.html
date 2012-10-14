@@ -36,8 +36,8 @@
         <div class="Container">
             <h1>What do you want to display from?</h1>
             <div class="LoginButtons" data-bind="foreach: loginOptions">
-                <a data-bind="attr: { 'class': id, href: 'select.html?source=' + encodeURIComponent(id) }">
-                    <img data-bind="attr: { src: 'images/' + id + '.png', alt: name + ' Icon' }" />
+                <a data-bind="attr: { 'class': id, href: url }">
+                    <img data-bind="attr: { src: iconUrl, alt: name + ' Icon' }" />
                     <span data-bind="text: name"></span>
                 </a>
             </div>
