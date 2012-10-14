@@ -60,6 +60,9 @@
 					});
 
 				return deferred.promise();
+			},
+			logout: function () {
+				Trello.deauthorize();
 			}
 		},
 		gCalendar: {

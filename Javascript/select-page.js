@@ -4,19 +4,30 @@
 
 var providerId = location.search.match(/[?&]source=([^&]*)/i)[1];
 var provider = Glisten.providers[providerId];
+if (!provider)
+	location = ".";
 
 var viewModel = {
 	providerId: providerId,
-	groups: ko.observableArray(),
-	isLoading: ko.observable(true)
-};
-if (!provider)
-	location = "..";
-else {
-	ko.applyBindings(viewModel);
+	displayName: provider.displayName,
+	iconUrl: 'images/' + encodeURI(providerId) + '.png',
 
-	refresh();
-}
+	groups: ko.observableArray(),
+	isLoading: ko.observable(true),
+};
+
+if (!provider.logout)
+	viewModel.logout = false;
+else
+	viewModel.logout = function () {
+		provider.logout();
+		location = ".";
+		return false;
+	};
+
+ko.applyBindings(viewModel);
+refresh();
+
 function refresh() {
 	viewModel.isLoading(true);
 	provider.getLists().then(function (groups) {

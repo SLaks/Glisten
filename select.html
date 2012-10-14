@@ -24,7 +24,7 @@
 
     </head>
 
-    <body>
+    <body data-bind="attr: { 'class': providerId }">
         <!--[if lt IE 7]>
             <p class="chromeframe">You are using an outdated browser. <a href="http://browsehappy.com/">Upgrade your browser today</a> or <a href="http://www.google.com/chromeframe/?redirect=true">install Google Chrome Frame</a> to better experience this site.</p>
         <![endif]-->
@@ -34,7 +34,13 @@
         </header>
 
         <div class="Container">
-            <h1>What do you want to display?</h1>
+            <header>
+                <h1>
+                    <img data-bind="attr: { src: iconUrl, alt: name + ' Icon' }" />
+                    Select a list from <span data-bind="text: displayName"></span>&nbsp;to display.</h1>
+                <a class="PickSource" href=".">Pick a different source</a> <a href="#logout" class="Logout" data-bind="click: logout, if: logout">
+                    Log out from <span data-bind="text: displayName"></span></a>
+            </header>
             <div class="ListGroups" data-bind="foreach: groups, css: { Loading: isLoading }">
                 <h2 data-bind="text: name"></h2>
                 <ul data-bind="foreach: lists">

@@ -11,8 +11,30 @@
 	}
 }
 
+.Container header {
+	overflow: auto;
+
+	a {
+		font-size: 1.5em;
+		color: #00e;
+
+		&:visited {
+			color: #00e;
+		}
+	}
+
+	a.Logout {
+		float: right;
+	}
+}
+
 h1 {
+	margin-bottom: .25em;
 	font-size: 3em;
+
+	img {
+		vertical-align: top;
+	}
 }
 
 .Loading {
@@ -20,6 +42,8 @@ h1 {
 }
 
 .ListGroups {
+	clear: both;
+
 	h2 {
 		padding: 1.5em 0 .15em;
 		font-size: 2.5em;
@@ -36,7 +60,8 @@ h1 {
 			text-decoration: none;
 			padding: .25em .25em .25em .75em;
 		}
-		a:visited{
+
+		a:visited {
 			color: #009;
 		}
 
