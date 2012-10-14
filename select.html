@@ -37,9 +37,9 @@
             <h1>What do you want to display?</h1>
             <div class="ListGroups" data-bind="foreach: groups, css: { Loading: isLoading }">
                 <h2 data-bind="text: name"></h2>
-                <ul data-bind="foreach: items">
+                <ul data-bind="foreach: lists">
                     <li>
-                        <a data-bind="text: name, attr: { href: 'list.html?source=' + encodeURIComponent(source)+'&list=' + providerId }"></a>
+                        <a data-bind="text: name, attr: { href: url }"></a>
                     </li>
                 </ul>
             </div>
