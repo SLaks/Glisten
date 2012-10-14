@@ -45,6 +45,20 @@
 				});
 			},
 			readList: function (id) {
+				return this.login().pipe(function () {
+					return Trello.lists.get(encodeURI(id), { cards: 'open', card_fields: 'name', fields: 'name' })
+				}).pipe(function (list) {
+					var items = [];
+					for (var i = 0; i < list.cards.length; i++) {
+						var card = list.cards[i];
+						items.push({ text: card.name });
+					}
+
+					return {
+						name: list.name,
+						items: items
+					};
+				});
 			},
 			login: function () {
 				var deferred = $.Deferred();

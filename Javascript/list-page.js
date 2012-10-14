@@ -1,26 +1,82 @@
 ﻿/// <reference path="../Scripts/modernizr-2.6.1-respond-1.1.0.min.js" />
 /// <reference path="../Scripts/jquery-1.8.2.js" />
 /// <reference path="../Scripts/knockout-2.1.0.js" />
+/// <reference path="providers.js" />
 
-var colorCount = 5;
+var colorCount = 5;	//This must match the number of CSS classes defined in item-colors.less
+var advanceDelay = 15;	//Seconds between slides
+var refreshDelay = 45;
 
-var data = [
-	{ author: 'Schabse Laks', text: 'Welcome to the CalendarBoard system!' },
-	{ author: 'Chana Laks', text: 'We aren\'t having anyone for שבת' },
-	{ author: 'David Laks', text: 'There are two Kiddushim to go to.' }
-];
+var providerId = location.search.match(/[?&]source=([^&]*)/i)[1];
+var listId = location.search.match(/[?&]list=([^&]*)/i)[1];
 
-$.each(data, function () {
-	var hash = 17;
-	for (var i = 0; i < this.text.length; i++) {
-		hash = hash * 7 + this.text.charCodeAt(i);
-	}
-	this.cssClass = "Color" + (1 + (hash % colorCount));
+var provider = Glisten.providers[providerId];
+if (!provider || !listId)
+	location = ".";
+
+var viewModel = {
+	isLoading: ko.observable(true),
+	messages: ko.observableArray()
+};
+
+loadItems().then(function () {
+	$('.ListBorder .Content').addClass('Loaded');
+	advanceTimer = setInterval(advance, advanceDelay * 1000);
+
+	$(window).resize(function () {
+		selectMessage(activeIndex);
+	});
 });
+ko.applyBindings(viewModel);
 
-ko.applyBindings({ messages: data });
+var advanceTimer;
+function loadItems() {
+	viewModel.isLoading(true);
+	return provider.readList(listId).then(function (list) {
+		//If a new item is inserted before the current item, keep displaying the current item.
+		//If the current item was removed, go back to the beginning.
+		var currentText = false, newIndex = 0;
+		if (viewModel.messages.length > 0)
+			currentText = viewModel.messages[activeIndex].text;
 
-var activeIndex = 0;
+		viewModel.messages.removeAll();
+
+		document.title = list.name + " – Glisten"
+		for (var i = 0; i < list.items.length; i++) {
+			var item = list.items[i];
+
+			if (item.text === currentText)
+				activeIndex = i;
+
+			viewModel.messages.push({
+				author: item.author || false,
+				text: item.text,
+				cssClass: "Color" + (1 + (getHash(item.text) % colorCount))
+			});
+		}
+
+		viewModel.isLoading(false);
+		selectMessage(newIndex);
+
+		updateLayout();
+
+		setTimeout(loadItems, refreshDelay * 1000);
+	});
+}
+function getHash(text) {
+	var hash = 17;
+	for (var i = 0; i < text.length; i++) {
+		hash = hash * 7 + text.charCodeAt(i);
+	}
+	return hash;
+}
+
+function advance() {
+	if (activeIndex === viewModel.messages().length - 1)
+		selectMessage(0);
+	else
+		selectMessage(activeIndex + 1);
+}
 
 function updateLayout() {
 	$('.MessageDetail article').css('padding', function () {
@@ -30,12 +86,7 @@ function updateLayout() {
 	$('.ListBorder .Content').height($('.MessageList > *').eq(activeIndex).innerHeight());
 }
 
-updateLayout();
-setTimeout(function () {
-	updateLayout();
-	$('.ListBorder .Content').addClass('Ready');
-}, 10);	//Fix Chrome word wrapping issue
-
+var activeIndex = false;
 function selectMessage(index) {
 	activeIndex = index;
 
@@ -49,14 +100,3 @@ function selectMessage(index) {
 	$('.ListBorder').css('margin-top', $('.MessageList > *').eq(activeIndex).offset().top);
 }
 
-$(window).resize(function () {
-	updateLayout();
-	selectMessage(activeIndex);
-});
-
-setInterval(function () {
-	if (activeIndex === data.length - 1)
-		selectMessage(0);
-	else
-		selectMessage(activeIndex + 1);
-}, 3000);
