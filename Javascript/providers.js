@@ -20,14 +20,14 @@
 		return loadedScripts[url];
 	}
 
-	var CalenderBoard = global.Glisten = global.Glisten || {};
+	var Glisten = global.Glisten = global.Glisten || {};
 
-	CalenderBoard.providers = {
+	Glisten.providers = {
 		trello: {
 			displayName: 'Trello',
 			getLists: function () {
 				return this.login().pipe(function () {
-					return Trello.members.get("me", { boards: "all", board_lists: "open" });
+					return Trello.members.get("me", { boards: "open", board_lists: "open", fields: '' });
 				}).pipe(function (user) {
 					var groups = [];
 
