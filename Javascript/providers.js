@@ -23,6 +23,7 @@
 		return loadedScripts[url];
 	}
 
+	var googleClientLoad = false;
 	var googleApis = {};
 	function loadGoogleApi(name, version) {
 		/// <summary>Asynchronously loads a Google Javascript API.</summary>
@@ -32,7 +33,10 @@
 		var promiseKey = name + "/" + version;
 
 		if (!googleApis.hasOwnProperty(promiseKey)) {
-			googleApis[promiseKey] = loadScript("https://apis.google.com/js/client.js").pipe(function () {
+			googleClientLoad = googleClientLoad || $.getJSON("https://apis.google.com/js/client.js?onload=?");
+
+			googleApis[promiseKey] = googleClientLoad.pipe(function () {
+				console.log(arguments);
 				gapi.client.setApiKey(googleKey);
 
 				var retVal = $.Deferred();
@@ -45,8 +49,7 @@
 
 		return googleApis[promiseKey];
 	}
-
-
+	
 	var Glisten = global.Glisten = global.Glisten || {};
 
 	Glisten.providers = {
