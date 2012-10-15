@@ -12,6 +12,7 @@
 (function (global, undefined) {
 	var trelloKey = '6068fb37739492894da608debf94ef7f';
 	var googleKey = 'AIzaSyB6WakYj2GCQIudxb_e7X9pZ8M86Eqw8bE';
+	var googleClientId = '744530515908.apps.googleusercontent.com';
 
 	var loadedScripts = {};
 	function loadScript(url) {
@@ -33,15 +34,20 @@
 		var promiseKey = name + "/" + version;
 
 		if (!googleApis.hasOwnProperty(promiseKey)) {
-			googleClientLoad = googleClientLoad || $.getJSON("https://apis.google.com/js/client.js?onload=?");
+			if (!googleClientLoad) {
+				var cbName = "GoogleLoadCallback-" + ++jQuery.uuid;
+				var libPromise = $.Deferred();
+				global[cbName] = function () { libPromise.resolve(); delete global[cbName]; }
+				$.getScript("https://apis.google.com/js/client.js?onload=" + encodeURIComponent(cbName));
+				googleClientLoad = libPromise.promise();
+			}
 
 			googleApis[promiseKey] = googleClientLoad.pipe(function () {
-				console.log(arguments);
 				gapi.client.setApiKey(googleKey);
 
 				var retVal = $.Deferred();
 
-				gapi.client.load(name, version, function () { retVal.resolve(); });
+				gapi.client.load(name, version, $.proxy(retVal, 'resolve'));
 
 				return retVal.promise();
 			});
@@ -49,7 +55,7 @@
 
 		return googleApis[promiseKey];
 	}
-	
+
 	var Glisten = global.Glisten = global.Glisten || {};
 
 	Glisten.providers = {
@@ -98,8 +104,8 @@
 						Trello.authorize({
 							type: 'popup',
 							name: 'Glisten',
-							success: function () { deferred.resolve(); },
-							error: function () { deferred.reject(); }
+							success: $.proxy(deferred, 'resolve'),
+							error: $.proxy(deferred, 'deferred')
 						});
 					});
 
@@ -116,15 +122,14 @@
 				return this.login().pipe(function () {
 					var promise = $.Deferred();
 
-					gapi.client.calendar.calendarList.list(
-						{ fields: "items(id,summary,summaryOverride)" },
-						function (results) {
-							promise.resolve(results);
-						}
-					);
+					gapi.client.calendar.calendarList.list({ fields: "items(id,summary,summaryOverride)" })
+							.execute($.proxy(promise, 'resolve'));
 
 					return promise.promise();
 				}).pipe(function (results) {
+					if (results.error)
+						return $.Deferred().reject(results.error.message);
+
 					var groups = [];
 					for (var i = 0; i < results.items.length; i++) {
 						var calendar = results.items[i];
@@ -137,6 +142,7 @@
 							]
 						});
 					}
+					return groups;
 				});
 			},
 			readList: function (id) {
@@ -147,9 +153,9 @@
 
 					gapi.auth.authorize(
 						{
-							client_id: 'AIzaSyB6WakYj2GCQIudxb_e7X9pZ8M86Eqw8bE',
+							client_id: googleClientId,
 							scope: 'https://www.googleapis.com/auth/calendar.readonly',
-							immediate: true
+							immediate: false
 						}, function (authResult) {
 							if (authResult && authResult.error)
 								promise.reject(authResult.error);
