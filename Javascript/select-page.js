@@ -1,8 +1,9 @@
 ﻿/// <reference path="../Scripts/jquery-1.8.2.js" />
 /// <reference path="../Scripts/knockout-2.1.0.js" />
 /// <reference path="providers.js" />
+/// <reference path="Utils.js" />
 
-var providerId = decodeURIComponent(location.search.match(/[?&]source=([^&]*)/i)[1]);
+var providerId = readQueryString("source");
 var provider = Glisten.providers[providerId];
 if (!provider)
 	location.href = ".";

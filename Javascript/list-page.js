@@ -2,13 +2,14 @@
 /// <reference path="../Scripts/jquery-1.8.2.js" />
 /// <reference path="../Scripts/knockout-2.1.0.js" />
 /// <reference path="providers.js" />
+/// <reference path="Utils.js" />
 
 var colorCount = 5;	//This must match the number of CSS classes defined in item-colors.less
 var advanceDelay = 15;	//Seconds between slides
 var refreshDelay = 45;
 
-var providerId = decodeURIComponent(location.search.match(/[?&]source=([^&]*)/i)[1]);
-var listId = decodeURIComponent(location.search.match(/[?&]list=([^&]*)/i)[1]);
+var providerId = Glisten.readQueryString("source");
+var listId = Glisten.readQueryString("list");
 
 var provider = Glisten.providers[providerId];
 if (!provider || !listId)
