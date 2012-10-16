@@ -13,7 +13,7 @@ for (var id in Glisten.providers) {
 		id: id,
 		name: p.displayName,
 		url: 'select.html?source=' + encodeURIComponent(id),
-		iconUrl: 'images/' + encodeURI(id) + '.png'
+		iconUrl: 'Images/' + encodeURI(id) + '.png'
 	});
 }
 ko.applyBindings({ loginOptions: loginOptions });

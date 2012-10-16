@@ -10,7 +10,7 @@ if (!provider)
 var viewModel = {
 	providerId: providerId,
 	displayName: provider.displayName,
-	iconUrl: 'images/' + encodeURI(providerId) + '.png',
+	iconUrl: 'Images/' + encodeURI(providerId) + '.png',
 
 	groups: ko.observableArray(),
 	isLoading: ko.observable(true),
