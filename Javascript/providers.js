@@ -146,6 +146,30 @@
 				});
 			},
 			readList: function (id) {
+				var parts = id.match(/^(\d+)([wm]):(.+)$/);
+				var unitCount = parts[1];
+				var unit = parts[2];
+				var calendarId = parts[3];
+
+				return this.login().pipe(function () {
+					var promise = $.Deferred();
+
+					gapi.client.calendar.events.list({ fields: "description,items(creator(displayName,email),summary)", calendarId: calendarId })
+						.execute($.proxy(promise, 'resolve'));
+
+					return promise.promise();
+				}).pipe(function (results) {
+					var items = [];
+					for (var i = 0; i < results.items.length; i++) {
+						var event = results.items[i];
+						items.push({ text: event.summary, author: event.creator.displayName || event.creator.email });
+					}
+
+					return {
+						name: results.description,
+						items: items
+					};
+				});
 			},
 			login: function () {
 				return loadGoogleApi('calendar', 'v3').pipe(function () {
