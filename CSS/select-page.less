@@ -48,6 +48,7 @@ h1 {
 		padding: 1.5em 0 .15em;
 		font-size: 2.5em;
 		border-bottom: 1px solid white;
+		clear: both;
 	}
 
 	ul {
@@ -68,6 +69,23 @@ h1 {
 		a:hover {
 			background: #E4EEFF;
 			color: black;
+		}
+	}
+}
+
+.TiledGroups(@columns) {
+	.ListGroups ul {
+		overflow: auto;
+		border-left: 1px solid #E4EEFF;
+
+		li {
+			float: left;
+			width: 100% / @columns;
+		}
+
+		a {
+			padding: .3em .5em;
+			border-right: 1px solid #E4EEFF;
 		}
 	}
 }
