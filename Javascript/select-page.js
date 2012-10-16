@@ -2,7 +2,7 @@
 /// <reference path="../Scripts/knockout-2.1.0.js" />
 /// <reference path="providers.js" />
 
-var providerId = location.search.match(/[?&]source=([^&]*)/i)[1];
+var providerId = decodeURIComponent(location.search.match(/[?&]source=([^&]*)/i)[1]);
 var provider = Glisten.providers[providerId];
 if (!provider)
 	location = ".";

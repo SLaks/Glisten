@@ -7,8 +7,8 @@ var colorCount = 5;	//This must match the number of CSS classes defined in item-
 var advanceDelay = 15;	//Seconds between slides
 var refreshDelay = 45;
 
-var providerId = location.search.match(/[?&]source=([^&]*)/i)[1];
-var listId = location.search.match(/[?&]list=([^&]*)/i)[1];
+var providerId = decodeURIComponent(location.search.match(/[?&]source=([^&]*)/i)[1]);
+var listId = decodeURIComponent(location.search.match(/[?&]list=([^&]*)/i)[1]);
 
 var provider = Glisten.providers[providerId];
 if (!provider || !listId)
