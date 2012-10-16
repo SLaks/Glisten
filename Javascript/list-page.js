@@ -83,7 +83,9 @@ function updateLayout() {
 		var me = $(this);
 		return (me.parent().height() - me.height()) / 2 + 'px ' + me.css('padding-left');
 	});
-	$('.ListBorder .Content').height($('.MessageList > *').eq(activeIndex).innerHeight());
+
+	if ($('.MessageList').is(':visible'))
+		$('.ListBorder .Content').height($('.MessageList > *').eq(activeIndex).innerHeight());
 }
 
 var activeIndex = false;
@@ -97,6 +99,8 @@ function selectMessage(index) {
 			return parseInt(old, 10) - $(this).parent().children().eq(index).offset().top;
 		}
 	);
-	$('.ListBorder').css('margin-top', $('.MessageList > *').eq(activeIndex).offset().top);
+
+	if ($('.MessageList').is(':visible'))
+		$('.ListBorder').css('margin-top', $('.MessageList > *').eq(activeIndex).offset().top);
 }
 
