@@ -35,9 +35,9 @@
 
 		if (!googleApis.hasOwnProperty(promiseKey)) {
 			if (!googleClientLoad) {
-				var cbName = "GoogleLoadCallback-" + ++jQuery.uuid;
+				var cbName = "GoogleLoadCallback-" + (++jQuery.uuid);
 				var libPromise = $.Deferred();
-				global[cbName] = function () { libPromise.resolve(); delete global[cbName]; }
+				global[cbName] = function () { libPromise.resolve(); delete global[cbName]; };
 				$.getScript("https://apis.google.com/js/client.js?onload=" + encodeURIComponent(cbName));
 				googleClientLoad = libPromise.promise();
 			}
@@ -82,7 +82,7 @@
 			},
 			readList: function (id) {
 				return this.login().pipe(function () {
-					return Trello.lists.get(encodeURI(id), { cards: 'open', card_fields: 'name', fields: 'name' })
+					return Trello.lists.get(encodeURI(id), { cards: 'open', card_fields: 'name', fields: 'name' });
 				}).pipe(function (list) {
 					var items = [];
 					for (var i = 0; i < list.cards.length; i++) {
@@ -154,8 +154,10 @@
 				return this.login().pipe(function () {
 					var promise = $.Deferred();
 
-					gapi.client.calendar.events.list({ fields: "description,items(creator(displayName,email),summary)", calendarId: calendarId })
-						.execute($.proxy(promise, 'resolve'));
+					gapi.client.calendar.events.list({
+						fields: "description,items(creator(displayName,email),summary)",
+						calendarId: calendarId
+					}).execute($.proxy(promise, 'resolve'));
 
 					return promise.promise();
 				}).pipe(function (results) {

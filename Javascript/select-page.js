@@ -5,7 +5,7 @@
 var providerId = decodeURIComponent(location.search.match(/[?&]source=([^&]*)/i)[1]);
 var provider = Glisten.providers[providerId];
 if (!provider)
-	location = ".";
+	location.href = ".";
 
 var viewModel = {
 	providerId: providerId,
@@ -21,7 +21,7 @@ if (!provider.logout)
 else
 	viewModel.logout = function () {
 		provider.logout();
-		location = ".";
+		location.href = ".";
 		return false;
 	};
 

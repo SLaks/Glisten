@@ -12,7 +12,7 @@ var listId = decodeURIComponent(location.search.match(/[?&]list=([^&]*)/i)[1]);
 
 var provider = Glisten.providers[providerId];
 if (!provider || !listId)
-	location = ".";
+	location.href = ".";
 
 var viewModel = {
 	isLoading: ko.observable(true),
@@ -41,7 +41,7 @@ function loadItems() {
 
 		viewModel.messages.removeAll();
 
-		document.title = list.name + " – Glisten"
+		document.title = list.name + " – Glisten";
 		for (var i = 0; i < list.items.length; i++) {
 			var item = list.items[i];
 
