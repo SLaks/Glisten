@@ -147,16 +147,38 @@
 			},
 			readList: function (id) {
 				var parts = id.match(/^(\d+)([wm]):(.+)$/);
-				var unitCount = parts[1];
+				if (!parts) return $.Deferred().reject();
+				var unitCount = parseInt(parts[1], 10);
 				var unit = parts[2];
 				var calendarId = parts[3];
 
+				var today = new Date();
+				today = new Date(today.getFullYear(), today.getMonth(), today.getDate());
+				var endDate;
+
+				switch (unit) {
+					case 'm':
+						endDate = new Date(today.getFullYear(), today.getMonth() + unitCount, 1);
+						console.log(today.getFullYear(), today.getMonth() + unitCount);
+						break;
+					case 'w':
+						endDate = new Date(
+							today.getFullYear(),
+							today.getMonth(),
+							today.getDate() - today.getDay() + 7 * unitCount
+						);
+						break;
+				}
+
 				return this.login().pipe(function () {
 					var promise = $.Deferred();
+					console.log(endDate);
 
 					gapi.client.calendar.events.list({
-						fields: "description,items(creator(displayName,email),summary)",
-						calendarId: calendarId
+						fields: "summary,items(creator(displayName,email),summary)",
+						calendarId: calendarId,
+						timeMin: today,
+						timeMax: endDate
 					}).execute($.proxy(promise, 'resolve'));
 
 					return promise.promise();
@@ -168,7 +190,7 @@
 					}
 
 					return {
-						name: results.description,
+						name: results.summary,
 						items: items
 					};
 				});
