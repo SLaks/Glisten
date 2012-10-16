@@ -11,8 +11,8 @@
 
 (function (global, undefined) {
 	var trelloKey = '6068fb37739492894da608debf94ef7f';
-	var googleKey = 'AIzaSyB6WakYj2GCQIudxb_e7X9pZ8M86Eqw8bE';
-	var googleClientId = '744530515908.apps.googleusercontent.com';
+	var googleKey = 'AIzaSyA4gRp0fklN_X5HrRN8IXuR0Ch8FTitizQ';
+	var googleClientId = '701998454083.apps.googleusercontent.com';
 
 	var loadedScripts = {};
 	function loadScript(url) {
@@ -136,7 +136,7 @@
 
 						groups.push({
 							name: calendar.summaryOverride || calendar.summary,
-							items: [
+							lists: [
 								{ name: 'This Week', id: '1w:' + calendar.id },
 								{ name: 'This Month', id: '1m:' + calendar.id }
 							]
