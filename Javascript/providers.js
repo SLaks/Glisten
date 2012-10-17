@@ -175,6 +175,8 @@
 					gapi.client.calendar.events.list({
 						fields: "summary,items(creator(displayName,email),summary)",
 						calendarId: calendarId,
+						singleEvents: true,
+						orderBy: 'startTime',
 						timeMin: today,
 						timeMax: endDate
 					}).execute($.proxy(promise, 'resolve'));
