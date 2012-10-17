@@ -16,13 +16,13 @@ if (!provider || !listId)
 	location.href = ".";
 
 var viewModel = {
+	providerName: provider.displayName,
 	isLoading: ko.observable(true),
 	messages: ko.observableArray()
 };
 
 loadItems().then(function () {
 	$('.ListBorder .Content').addClass('Loaded');
-	advanceTimer = setInterval(advance, advanceDelay * 1000);
 
 	$(window).resize(function () {
 		selectMessage(activeIndex);
@@ -30,7 +30,19 @@ loadItems().then(function () {
 });
 ko.applyBindings(viewModel);
 
-var advanceTimer;
+var advanceTimer = false;
+function setTimerState(on) {
+	on = !!on;
+	if (!!advanceTimer === on) return;
+
+	if (on)
+		advanceTimer = setInterval(advance, advanceDelay * 1000);
+	else {
+		clearInterval(advanceTimer);
+		advanceTimer = false;
+	}
+}
+
 function loadItems() {
 	viewModel.isLoading(true);
 	return provider.readList(listId).then(function (list) {
@@ -57,9 +69,13 @@ function loadItems() {
 		}
 
 		viewModel.isLoading(false);
-		selectMessage(newIndex);
+		//If we have items to display, start the timer.
+		setTimerState(viewModel.messages.length);
 
-		updateLayout();
+		if (viewModel.messages.length) {
+			selectMessage(newIndex);
+			updateLayout();
+		}
 
 		setTimeout(loadItems, refreshDelay * 1000);
 	});
