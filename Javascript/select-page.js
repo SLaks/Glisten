@@ -3,7 +3,7 @@
 /// <reference path="providers.js" />
 /// <reference path="Utils.js" />
 
-var providerId = readQueryString("source");
+var providerId = Glisten.readQueryString("source");
 var provider = Glisten.providers[providerId];
 if (!provider)
 	location.href = ".";
