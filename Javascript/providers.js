@@ -204,7 +204,7 @@
 						{
 							client_id: googleClientId,
 							scope: 'https://www.googleapis.com/auth/calendar.readonly',
-							immediate: false
+							immediate: true
 						}, function (authResult) {
 							if (authResult && authResult.error)
 								promise.reject(authResult.error);
