@@ -11,13 +11,14 @@ body {
 		height: 100%;
 	}
 
-	.ListBorder {
+	.BorderPane {
 		position: absolute;
 		left: @leftWidth;
 		top: 0;
 		margin-left: -1 * @borderWidth;
 		width: @borderWidth;
 		height: 100%;
+		overflow: hidden;
 	}
 
 	.RightPane {
@@ -90,6 +91,9 @@ body {
 @easing: cubic-bezier(.69,.9,.9,1);
 
 .ListBorder {
+	position: absolute;
+	height: 100%;
+	width: @borderWidth;
 	-moz-transition: margin-top @easing .8s;
 	-o-transition: margin-top @easing .8s;
 	-webkit-transition: margin-top @easing .8s;
