@@ -51,7 +51,7 @@ function loadItems() {
 		//If the current item was removed, go back to the beginning.
 		var currentText = false, newIndex = 0;
 		if (viewModel.messages().length > 0)
-			currentText = viewModel.messages[activeIndex].text;
+			currentText = viewModel.messages()[activeIndex].text;
 
 		viewModel.listName(list.name);
 
