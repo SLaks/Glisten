@@ -51,7 +51,7 @@ function loadItems() {
 		//If a new item is inserted before the current item, keep displaying the current item.
 		//If the current item was removed, go back to the beginning.
 		var currentText = false, newIndex = 0;
-		if (viewModel.messages.length > 0)
+		if (viewModel.messages().length > 0)
 			currentText = viewModel.messages[activeIndex].text;
 
 		viewModel.listName(list.name);
@@ -72,9 +72,9 @@ function loadItems() {
 
 		viewModel.isLoading(false);
 		//If we have items to display, start the timer.
-		setTimerState(viewModel.messages.length);
+		setTimerState(viewModel.messages().length);
 
-		if (viewModel.messages.length) {
+		if (viewModel.messages().length) {
 			selectMessage(newIndex);
 			updateLayout();
 		}
