@@ -197,20 +197,31 @@
 				});
 			},
 			login: function () {
+				// Passing immediate: true will not show a popup, but will fail
+				// if the user has not granted access. If it fails, I try again
+				// and pass false to show the login popup.
+				function tryLogin(callback, secondTry) {
+					gapi.auth.authorize({
+						client_id: googleClientId,
+						scope: 'https://www.googleapis.com/auth/calendar.readonly',
+						immediate: !secondTry
+					}, function (authResult) {
+						if (!authResult && !secondTry)
+							tryLogin(callback, true);
+						else
+							callback(authResult);
+					});
+				}
+
 				return loadGoogleApi('calendar', 'v3').pipe(function () {
 					var promise = $.Deferred();
 
-					gapi.auth.authorize(
-						{
-							client_id: googleClientId,
-							scope: 'https://www.googleapis.com/auth/calendar.readonly',
-							immediate: true
-						}, function (authResult) {
-							if (authResult && authResult.error)
-								promise.reject(authResult.error);
-							else
-								promise.resolve();
-						});
+					tryLogin(function (authResult) {
+						if (authResult && authResult.error)
+							promise.reject(authResult.error);
+						else
+							promise.resolve();
+					});
 
 					return promise.promise();
 				});
