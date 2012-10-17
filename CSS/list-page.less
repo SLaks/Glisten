@@ -5,28 +5,37 @@ body {
 	background-color: #ddd;
 }
 
+.LeftPane {
+	height: 100%;
+}
+
+.BorderPane {
+	position: absolute;
+	top: 0;
+	margin-left: -1 * @borderWidth;
+	width: @borderWidth;
+	height: 100%;
+	overflow: hidden;
+}
+
+.RightPane {
+	height: 100%;
+	top: 0;
+	position: absolute;
+}
+
 .Panes(@leftWidth) {
 	.LeftPane {
 		width: @leftWidth;
-		height: 100%;
 	}
-
+	
 	.BorderPane {
-		position: absolute;
 		left: @leftWidth;
-		top: 0;
-		margin-left: -1 * @borderWidth;
-		width: @borderWidth;
-		height: 100%;
-		overflow: hidden;
 	}
 
 	.RightPane {
-		height: 100%;
-		top: 0;
 		left: @leftWidth;
 		width: 100% - @leftWidth;
-		position: absolute;
 	}
 }
 
