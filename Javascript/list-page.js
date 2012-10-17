@@ -17,6 +17,7 @@ if (!provider || !listId)
 
 var viewModel = {
 	providerName: provider.displayName,
+	listName: ko.observable("Loading"),
 	isLoading: ko.observable(true),
 	messages: ko.observableArray()
 };
@@ -28,7 +29,8 @@ loadItems().then(function () {
 		selectMessage(activeIndex);
 	});
 });
-ko.applyBindings(viewModel);
+// Apply to the HTML element to include bindings on <title>
+ko.applyBindings(viewModel, $('html')[0]);
 
 var advanceTimer = false;
 function setTimerState(on) {
@@ -52,9 +54,9 @@ function loadItems() {
 		if (viewModel.messages.length > 0)
 			currentText = viewModel.messages[activeIndex].text;
 
-		viewModel.messages.removeAll();
+		viewModel.listName(list.name);
 
-		document.title = list.name + " – Glisten";
+		viewModel.messages.removeAll();
 		for (var i = 0; i < list.items.length; i++) {
 			var item = list.items[i];
 

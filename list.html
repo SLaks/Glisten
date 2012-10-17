@@ -9,7 +9,7 @@
     <head>
         <meta charset="utf-8">
         <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
-        <title>Loading – Glisten</title>
+        <title data-bind="text: listName() + ' – Glisten'">Loading – Glisten</title>
         <link rel="shortcut icon" href="favicon.ico" />
         <meta name="viewport" content="width=device-width">
 
@@ -27,11 +27,11 @@
         <!--[if lt IE 7]>
             <p class="chromeframe">You are using an outdated browser. <a href="http://browsehappy.com/">Upgrade your browser today</a> or <a href="http://www.google.com/chromeframe/?redirect=true">install Google Chrome Frame</a> to better experience this site.</p>
         <![endif]-->
-        <div data-bind="if: !messages().length" class="Notice">There is nothing from to display from <span data-bind="text: providerName">
-        </span>
+        <div data-bind="if: !isLoading() && !messages().length" class="Notice">There is nothing from to display in <span data-bind="text: listName">
+        </span>&#32;from <span data-bind="text: providerName"></span>
         </div>
 
-        <div data-bind="if: messages().length">
+        <div data-bind="if: !isLoading() && messages().length">
             <ul class="LeftPane MessageList" data-bind="foreach: messages">
                 <li data-bind="attr: { 'class': cssClass }">
                     <h2 data-bind="text: text"></h2>
