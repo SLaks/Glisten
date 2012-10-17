@@ -1,6 +1,10 @@
 ﻿@import url(item-colors.less);
 @borderWidth: 2px;
 
+body {
+	background-color: #ddd;
+}
+
 .Panes(@leftWidth) {
 	.LeftPane {
 		width: @leftWidth;
@@ -58,13 +62,13 @@
 	letter-spacing: 6px;
 }
 
-.ListArea {
-	height: 100%;
+.Loading {
+	.Loader();
+	margin-top: 32em;
 }
 
 .MessageList {
 	list-style: none;
-	background-color: #ddd;
 
 	li {
 		padding: 2em 1em;

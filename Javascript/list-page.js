@@ -46,7 +46,6 @@ function setTimerState(on) {
 }
 
 function loadItems() {
-	viewModel.isLoading(true);
 	return provider.readList(listId).then(function (list) {
 		//If a new item is inserted before the current item, keep displaying the current item.
 		//If the current item was removed, go back to the beginning.
