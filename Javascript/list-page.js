@@ -22,6 +22,8 @@ var viewModel = {
 	messages: ko.observableArray()
 };
 
+$(document.body).dblclick(loadItems);
+
 loadItems().then(function () {
 	$('.ListBorder .Content').addClass('Loaded');
 
