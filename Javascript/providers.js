@@ -159,7 +159,6 @@
 				switch (unit) {
 					case 'm':
 						endDate = new Date(today.getFullYear(), today.getMonth() + unitCount, 1);
-						console.log(today.getFullYear(), today.getMonth() + unitCount);
 						break;
 					case 'w':
 						endDate = new Date(
@@ -172,7 +171,6 @@
 
 				return this.login().pipe(function () {
 					var promise = $.Deferred();
-					console.log(endDate);
 
 					gapi.client.calendar.events.list({
 						fields: "summary,items(creator(displayName,email),summary)",
@@ -184,9 +182,12 @@
 					return promise.promise();
 				}).pipe(function (results) {
 					var items = [];
-					for (var i = 0; i < results.items.length; i++) {
-						var event = results.items[i];
-						items.push({ text: event.summary, author: event.creator.displayName || event.creator.email });
+
+					if (results.items) {
+						for (var i = 0; i < results.items.length; i++) {
+							var event = results.items[i];
+							items.push({ text: event.summary, author: event.creator.displayName || event.creator.email });
+						}
 					}
 
 					return {
