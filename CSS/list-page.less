@@ -53,8 +53,26 @@ body {
 
 .Panes(35%);
 
+@media only screen and (max-width: 900px) {
+	body {
+		font-size: 6px;
+	}
+}
+
 @media only screen and (max-width: 600px) {
-	.Panes(50%);
+	.Panes(40%);
+
+	body {
+		font-size: 4px;
+	}
+
+	.MessageList h2 {
+		margin: 0 !important;
+	}
+
+	.MessageList h4 {
+		display: none;
+	}
 }
 
 @media only screen and (max-width: 400px) {
