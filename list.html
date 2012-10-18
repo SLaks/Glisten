@@ -34,12 +34,15 @@
         </div>
 
         <div data-bind="if: !isLoading() && messages().length">
-            <ul class="LeftPane MessageList" data-bind="foreach: messages">
-                <li data-bind="attr: { 'class': cssClass }">
-                    <h2 data-bind="text: text"></h2>
-                    <h4 data-bind="text: author, visible: author"></h4>
-                </li>
-            </ul>
+            <div class="LeftPane">
+                <ul class="MessageList" data-bind="foreach: messages">
+                    <li data-bind="attr: { 'class': cssClass }">
+                        <h2 data-bind="text: text"></h2>
+                        <h4 data-bind="text: author, visible: author"></h4>
+                    </li>
+                </ul>
+                <div class="ScrollThumb"></div>
+            </div>
             <div class="BorderPane">
                 <div class="ListBorder">
                     <div class="Border"></div>

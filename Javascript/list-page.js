@@ -104,8 +104,21 @@ function updateLayout() {
 		return (me.parent().height() - me.height()) / 2 + 'px ' + me.css('padding-left');
 	});
 
+	layoutScrollbar($('.ScrollThumb'));
+
 	if ($('.MessageList').is(':visible'))
 		$('.ListBorder .Content').height($('.MessageList > *').eq(activeIndex).innerHeight());
+}
+
+function layoutScrollbar(scrollThumb) {
+	/// <param name="scrollThumb" type="jQuery">The scroll thumb element that will visualize the scrolling position.</param>
+
+	var contentHeight = scrollThumb.prev().height(), paneHeight = scrollThumb.parent().height();
+
+	if (contentHeight < paneHeight)
+		scrollThumb.hide();
+	else
+		scrollThumb.height(paneHeight * (paneHeight / contentHeight)).show();
 }
 
 var activeIndex = false;
@@ -120,7 +133,27 @@ function selectMessage(index) {
 		}
 	);
 
-	if ($('.MessageList').is(':visible'))
-		$('.ListBorder').css('margin-top', $('.MessageList > *').eq(activeIndex).offset().top);
-}
+	var messageList = $('.MessageList');
+	if (messageList.is(':visible')) {
+		var currentItem = messageList.children().eq(activeIndex);
+		var itemHeight = currentItem.height();
+		var itemTop = currentItem.position().top;
+		var paneHeight = messageList.parent().height();
+		var contentHeight = messageList.height();
 
+		var scrollOffset = -parseFloat(messageList.css('top')) || 0;
+
+		if (itemTop - scrollOffset > paneHeight - itemHeight * 2)
+			scrollOffset = Math.min(contentHeight - paneHeight, itemTop - paneHeight / 2);
+		else if (itemTop < scrollOffset)
+			scrollOffset = Math.max(0, itemTop - itemHeight * 2);
+
+		messageList.css('top', -scrollOffset)
+			.next().css('top', (scrollOffset / contentHeight) * paneHeight);
+
+		$('.ListBorder').css({
+			top: -scrollOffset,
+			marginTop: itemTop
+		});
+	}
+}

@@ -6,7 +6,9 @@ body {
 }
 
 .LeftPane {
+	position: absolute;
 	height: 100%;
+	overflow: hidden;
 }
 
 .BorderPane {
@@ -28,7 +30,7 @@ body {
 	.LeftPane {
 		width: @leftWidth;
 	}
-	
+
 	.BorderPane {
 		left: @leftWidth;
 	}
@@ -81,7 +83,7 @@ body {
 	list-style: none;
 
 	li {
-		padding: 2em 1em;
+		padding: 2em 1em 2em 1.1em;
 		border-bottom: @borderWidth solid white;
 
 		h2 {
@@ -98,15 +100,40 @@ body {
 }
 
 @easing: cubic-bezier(.69,.9,.9,1);
+@scrollDuration: 1.5s;
+
+.MessageList {
+	position: relative;
+	-moz-transition: top @easing @scrollDuration;
+	-o-transition: top @easing @scrollDuration;
+	-webkit-transition: top @easing @scrollDuration;
+	transition: top @easing @scrollDuration;
+}
+
+.ScrollThumb {
+	@width: 3px;
+	display: none;
+	position: absolute;
+	margin-left: @width;
+	background-color: #888;
+	background-color: rgba(136, 136, 136, .5);
+	width: @width;
+	border-radius: @width / 2;
+	-moz-transition: height @easing @scrollDuration, top @easing @scrollDuration;
+	-o-transition: height @easing @scrollDuration, top @easing @scrollDuration;
+	-webkit-transition: height @easing @scrollDuration, top @easing @scrollDuration;
+	transition: height @easing @scrollDuration, top @easing @scrollDuration;
+}
+
 
 .ListBorder {
 	position: absolute;
 	height: 100%;
 	width: @borderWidth;
-	-moz-transition: margin-top @easing .8s;
-	-o-transition: margin-top @easing .8s;
-	-webkit-transition: margin-top @easing .8s;
-	transition: margin-top @easing .8s;
+	-moz-transition: margin-top @easing .8s, top @easing @scrollDuration;
+	-o-transition: margin-top @easing .8s, top @easing @scrollDuration;
+	-webkit-transition: margin-top @easing .8s, top @easing @scrollDuration;
+	transition: margin-top @easing .8s, top @easing @scrollDuration;
 	z-index: 2;
 
 	.Border {
