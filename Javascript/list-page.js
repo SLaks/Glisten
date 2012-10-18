@@ -22,7 +22,10 @@ var viewModel = {
 	messages: ko.observableArray()
 };
 
-$(document.body).dblclick(loadItems);
+$(document.body).dblclick(loadItems)
+				.on('click', '.MessageList > li', function () {
+					selectMessage($(this).index());
+				});
 
 loadItems().then(function () {
 	$('.ListBorder .Content').addClass('Loaded');
