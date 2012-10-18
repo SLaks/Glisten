@@ -47,29 +47,48 @@ function setTimerState(on) {
 	}
 }
 
+// To prevent Knockout.js from re-binding everything,
+// I re-use ViewModel list items.  (this prevents the
+// CSS animation from jumping back to the top)
+viewModel.messages.item = function (index) {
+	/// <summary>Gets the n'th item in the messages list, creating it if it doesn't already exist.</summary>
+
+	if (this().length > index)
+		return this()[index];
+
+	var retVal;
+	for (var i = this().length; i <= index; i++) {
+		this.push(retVal = {
+			author: ko.observable(),
+			text: ko.observable(),
+			cssClass: ko.observable()
+		});
+	}
+	return retVal;
+};
 function loadItems() {
 	return provider.readList(listId).then(function (list) {
 		//If a new item is inserted before the current item, keep displaying the current item.
 		//If the current item was removed, go back to the beginning.
 		var currentText = false, newIndex = 0;
 		if (viewModel.messages().length > 0)
-			currentText = viewModel.messages()[activeIndex].text;
+			currentText = viewModel.messages()[activeIndex].text();
 
 		viewModel.listName(list.name);
 
-		viewModel.messages.removeAll();
 		for (var i = 0; i < list.items.length; i++) {
 			var item = list.items[i];
 
 			if (item.text === currentText)
-				activeIndex = i;
+				newIndex = i;
 
-			viewModel.messages.push({
-				author: item.author || false,
-				text: item.text,
-				cssClass: "Color" + (1 + (getHash(item.text) % colorCount))
-			});
+			var vm = viewModel.messages.item(i);
+			vm.author(item.author || false);
+			vm.text(item.text);
+			vm.cssClass("Color" + (1 + (getHash(item.text) % colorCount)));
 		}
+		if (list.items.length < viewModel.messages().length)
+			viewModel.messages.splice(list.items.length, viewModel.messages().length - list.items.length);
 
 		viewModel.isLoading(false);
 		//If we have items to display, start the timer.
@@ -77,12 +96,12 @@ function loadItems() {
 
 		if (viewModel.messages().length) {
 			selectMessage(newIndex);
-			updateLayout();
 		}
 
 		setTimeout(loadItems, refreshDelay * 1000);
 	});
 }
+
 function getHash(text) {
 	var hash = 17;
 	for (var i = 0; i < text.length; i++) {
