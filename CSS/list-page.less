@@ -102,6 +102,10 @@ body {
 @easing: cubic-bezier(.69,.9,.9,1);
 @scrollDuration: 1.5s;
 
+// The top properties of these three elements
+// are animated to scroll the MessageList. At
+// the same time, the border's margin-top is
+// animated to move its gap.
 .MessageList {
 	position: relative;
 	-moz-transition: top @easing @scrollDuration;
@@ -114,7 +118,10 @@ body {
 	@width: 3px;
 	display: none;
 	position: absolute;
-	margin-left: @width;
+	// This margin creates space between the thumb
+	// and the edges of the window. The Javascript
+	// code leaves room for this margin.
+	margin: @width;
 	background-color: #888;
 	background-color: rgba(136, 136, 136, .5);
 	width: @width;

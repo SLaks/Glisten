@@ -113,12 +113,17 @@ function updateLayout() {
 function layoutScrollbar(scrollThumb) {
 	/// <param name="scrollThumb" type="jQuery">The scroll thumb element that will visualize the scrolling position.</param>
 
-	var contentHeight = scrollThumb.prev().height(), paneHeight = scrollThumb.parent().height();
+	// Pixels of margin on either side of the scroll thumb.
+	// This makes it look nicer when scrolled to the top or
+	// bottom of the window. I need to subtract it from the
+	// assigned height of the thumb.
+	scrollThumbMargin = parseFloat($('.ScrollThumb').css('margin-top'));
 
+	var contentHeight = scrollThumb.prev().height(), paneHeight = scrollThumb.parent().height();
 	if (contentHeight < paneHeight)
 		scrollThumb.hide();
 	else
-		scrollThumb.height(paneHeight * (paneHeight / contentHeight)).show();
+		scrollThumb.height(paneHeight * (paneHeight / contentHeight) - scrollThumbMargin * 2).show();
 }
 
 var activeIndex = false;
