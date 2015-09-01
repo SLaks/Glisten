@@ -177,8 +177,8 @@
 						calendarId: calendarId,
 						singleEvents: true,
 						orderBy: 'startTime',
-						timeMin: today,
-						timeMax: endDate
+						timeMin: today.toISOString(),
+						timeMax: endDate.toISOString()
 					}).execute($.proxy(promise, 'resolve'));
 
 					return promise.promise();
@@ -208,7 +208,7 @@
 						scope: 'https://www.googleapis.com/auth/calendar.readonly',
 						immediate: !secondTry
 					}, function (authResult) {
-						if (!authResult && !secondTry)
+						if (!secondTry && (!authResult || authResult.error == 'immediate_failed'))
 							tryLogin(callback, true);
 						else
 							callback(authResult);
